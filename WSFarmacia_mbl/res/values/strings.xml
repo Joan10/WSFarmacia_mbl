@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WSFarmacia_mbl</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="entra_admin">Administrador</string>
+    <string name="entra_farm">Farmacèutic</string>
+    <string name="lab_tria_usuari">Usuari:</string>
+    <string name="Noticies">str_noticies</string>
+    <string name="str_noticies">Noticies</string>
+
+</resources>
