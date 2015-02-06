@@ -23,6 +23,19 @@
             </intent-filter>
         </activity>
         <activity android:name="adminNoticies"></activity>
+        <activity android:name="adminFarmacies"></activity>
+        <activity android:name="adminMedicaments"></activity>
+        <activity android:name="adminEntrades"></activity>
+        <activity android:name="adminSortides"></activity>
+
+        <activity android:name="farmacNoticies"></activity>
+        <activity android:name="farmacFarmacies"></activity>
+        <activity android:name="farmacMedicaments"></activity>
+        <activity android:name="farmacEntrades"></activity>
+        <activity android:name="farmacSortides"></activity>
+        
+        <activity android:name="visualitzacioNoticia"></activity>
+        <activity android:name="visualitzacioMedicaments"></activity>
     </application>
 
 </manifest>

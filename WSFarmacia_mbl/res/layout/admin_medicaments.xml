@@ -7,7 +7,7 @@
   <!-- Header aligned to top -->
 
   <RelativeLayout
-      android:id="@+id/admin_noticies_header"
+      android:id="@+id/admin_medicaments_header"
       android:layout_width="match_parent"
       android:layout_height="50dp"
       android:layout_alignParentTop="true"
@@ -15,17 +15,17 @@
 >
 
       <TextView
-          android:id="@+id/admin_noticies_textView1"
+          android:id="@+id/admin_medicaments_textView1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentLeft="true"
           android:layout_centerVertical="true"
           android:layout_marginLeft="18dp"
-          android:text="@string/str_noticies"
+          android:text="@string/str_medicaments"
           android:textAppearance="?android:attr/textAppearanceLarge" />
 
       <ImageButton
-          android:id="@+id/admin_noticies_popupMenuBtn"
+          android:id="@+id/admin_medicaments_popupMenuBtn"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentRight="true"
@@ -41,7 +41,7 @@
   
   
   <RelativeLayout
-    android:id="@+id/admin_noticies_footer"
+    android:id="@+id/admin_medicaments_footer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
@@ -49,7 +49,7 @@
     android:gravity="center" >
 
       <ImageButton
-          android:id="@+id/admin_noticies_new_button"
+          android:id="@+id/admin_medicaments_new_button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentRight="true"
@@ -61,17 +61,17 @@
 
   <!-- Scrollable Item below header and above footer -->
   <ScrollView
-    android:id="@+id/admin_noticies_scrollableContents"
+    android:id="@+id/admin_medicaments_scrollableContents"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    android:layout_below="@id/admin_noticies_header"> 
-    <!-- android:layout_above="@id/admin_noticies_footer"  -->
+    android:layout_below="@id/admin_medicaments_header"> 
+    <!-- android:layout_above="@id/admin_medicaments_footer"  -->
     
       
 
     <LinearLayout
-        android:id="@+id/admin_noticies_linearlayout"
+        android:id="@+id/admin_medicaments_linearlayout"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:gravity="center_horizontal"

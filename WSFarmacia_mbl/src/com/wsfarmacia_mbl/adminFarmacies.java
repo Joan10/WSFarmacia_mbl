@@ -7,41 +7,37 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
-public class adminNoticies extends Activity {
+public class adminFarmacies extends Activity {
 	
-	//Pel pas de missatges a altres intents
-	public final static String TITOL_NOTICIA = "com.wsfarmacia_mbl.titolnoticia";
-	public final static String ID_NOTICIA = "com.wsfarmacia_mbl.idnoticia";
+
 	
-	//Listener pels botons de notícia
-	OnClickListener boto_noticia_Listener;
-	
-	private void TreuNoticies(){
+	private void TreuFarmacies(){
 		/*
 		 * Funció que posa els botons de cada notícia a la pantalla i
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
-		Button myButton = new Button(this);
-		myButton.setOnClickListener(boto_noticia_Listener);
-		myButton.setText("La meva primera notícia");
-		myButton.setId(544);
-		LinearLayout ll = (LinearLayout)findViewById(R.id.admin_noticies_linearlayout);
-		ll.addView(myButton);
+		TextView farmacia = new TextView(this);
+		farmacia.setText("farmacia 1");
+		farmacia.setPadding(0, 20, 0, 20);
+		farmacia.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+		LinearLayout ll = (LinearLayout)findViewById(R.id.admin_farmacies_linearlayout);
+		ll.addView(farmacia);
 		
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.admin_noticies);
+		setContentView(R.layout.admin_farmacies);
 		
-		//Preparam el menú popup
-		final ImageButton btn = (ImageButton) findViewById(R.id.admin_noticies_popupMenuBtn);
+		final ImageButton btn = (ImageButton) findViewById(R.id.admin_farmacies_popupMenuBtn);
 		final PopupMenu popupMenu = new PopupMenu(this, btn);
 		popupMenu.inflate(R.menu.admin_popup);	
 		btn.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +47,6 @@ public class adminNoticies extends Activity {
             }
         });	
 		
-		//Listener del menú popup
 		popupMenu.setOnMenuItemClickListener(
                 new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -61,17 +56,16 @@ public class adminNoticies extends Activity {
             	Intent adminIntent;
                 switch (item.getItemId()) {
                     case R.id.popup_menu_noticies:
-                    	//setContentView(R.layout.admin_noticies);
+        		    	
+                    	adminIntent = new Intent(adminFarmacies.this, adminNoticies.class);
+                    	adminFarmacies.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_farmacies:
-        		    	
-                    	adminIntent = new Intent(adminNoticies.this, adminFarmacies.class);
-                    	adminNoticies.this.startActivity(adminIntent);
-        		    	
+                       // Log.w("admin","BLUE");
                         break;
                     case R.id.popup_menu_medicaments:
-                    	adminIntent = new Intent(adminNoticies.this, adminMedicaments.class);
-                    	adminNoticies.this.startActivity(adminIntent);
+                    	adminIntent = new Intent(adminFarmacies.this, adminMedicaments.class);
+                    	adminFarmacies.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_entrades:
                     	Log.w("admin","GREEN");
@@ -84,30 +78,7 @@ public class adminNoticies extends Activity {
             }
         });
 		
-		
-		boto_noticia_Listener = new View.OnClickListener() {
-
-
-		    @Override
-		    public void onClick(View v) {
-				/*
-				 	En pitjar sobre un botó de notícia, hem d'identificar
-				 	el botó i iniciar el nou intent. al nou intent li
-				 	passam el títol de la notícia.
-				 */
-		    	Intent intentNoticia = new Intent(adminNoticies.this, visualitzacioNoticia.class);
-				Button pressed = (Button)v;
-				Log.w("boto", pressed.getText().toString());
-				String message = pressed.getText().toString();
-				intentNoticia.putExtra(TITOL_NOTICIA, message);
-				intentNoticia.putExtra(ID_NOTICIA, String.valueOf(pressed.getId()));
-				adminNoticies.this.startActivity(intentNoticia);
-		    }
-		};
-		
-		TreuNoticies();
-		
-		
+		TreuFarmacies();
 	}
 
 	@Override

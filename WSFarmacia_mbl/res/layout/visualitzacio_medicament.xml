@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+
+  <!-- Header aligned to top -->
+
+  <RelativeLayout
+      android:id="@+id/visualitzacio_medicament_header"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentTop="true"
+      android:background="#E0E0E0"
+>
+
+      <TextView
+          android:id="@+id/visualitzacio_medicament_titol"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:layout_marginLeft="18dp"
+          android:text="@string/str_medicaments"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+      <ImageButton
+          android:id="@+id/visualitzacio_medicament_back"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentTop="true"
+          android:adjustViewBounds="true"
+          android:baselineAlignBottom="false"
+          android:cropToPadding="false"
+          android:scaleType="fitXY"
+          android:src="@drawable/ic_back" />
+
+  </RelativeLayout>
+
+
+
+  <!-- Scrollable Item below header and above footer -->
+  <ScrollView
+    android:id="@+id/visualitzacio_medicament_scrollableContents"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:layout_below="@id/visualitzacio_medicament_header"> 
+    <!-- android:layout_above="@id/footer"  -->
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical" >
+
+          <TextView
+              android:id="@+id/visualitzacio_medicament_nom"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="Medium Text"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+          
+		 <LinearLayout         
+		    android:layout_width="fill_parent"
+			android:layout_height="2dip"
+			android:background="#000" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="@string/visualitzacio_medicament_descripcio"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/visualitzacio_medicament_descripcio"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:text="TextView" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="@string/visualitzacio_medicament_categoria"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/visualitzacio_medicament_categoria"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:focusableInTouchMode="true"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:text="Ctegoria" />
+
+      </LinearLayout>
+      
+  </ScrollView>
+
+</RelativeLayout>

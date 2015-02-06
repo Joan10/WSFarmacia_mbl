@@ -7,7 +7,15 @@
     <string name="entra_admin">Administrador</string>
     <string name="entra_farm">Farmacèutic</string>
     <string name="lab_tria_usuari">Usuari:</string>
-    <string name="Noticies">str_noticies</string>
     <string name="str_noticies">Noticies</string>
+    <string name="str_medicaments">Medicaments</string>
+    <string name="popup_menu_noticies">Notícies</string>
+    <string name="popup_menu_farmacies">Farmàcies</string>
+    <string name="popup_menu_medicaments">Medicaments</string>
+    <string name="popup_menu_entrades">Entrades</string>
+    <string name="popup_menu_sortides">Sortides</string>
+    <string name="str_farmacies">Farmàcies</string>
+    <string name="visualitzacio_medicament_descripcio">Descripció</string>
+    <string name="visualitzacio_medicament_categoria">Categoria</string>
 
 </resources>
