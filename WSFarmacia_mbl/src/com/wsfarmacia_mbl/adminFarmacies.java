@@ -1,6 +1,7 @@
 package com.wsfarmacia_mbl;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,18 +19,34 @@ public class adminFarmacies extends Activity {
 	
 
 	
-	private void TreuFarmacies(){
+	private void TreuFarmacies() throws Exception{
 		/*
 		 * Funció que posa els botons de cada notícia a la pantalla i
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
-		TextView farmacia = new TextView(this);
-		farmacia.setText("farmacia 1");
-		farmacia.setPadding(0, 20, 0, 20);
-		farmacia.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-		LinearLayout ll = (LinearLayout)findViewById(R.id.admin_farmacies_linearlayout);
-		ll.addView(farmacia);
+
+		ConnexioServidor con = new ConnexioServidor();
+		con.consultaBBDD("farmacias@@LTIM@@lista");
 		
+		//Exemple d'iteració entre farmàcies
+		
+		for (int i=0; i<con.getNumEntrades();i++){
+			for (int j=0; j<con.getNumElements(i); j++){
+				Log.w("WSFARMACIA", con.treuElement(i, j));
+			}
+			Log.w("WSFARMACIA","----------");
+		}
+		
+		
+		for (int i=0; i<con.getNumEntrades();i++){
+			TextView farmacia = new TextView(this);
+			farmacia.setText(i+": "+con.treuElement(i, 1));
+			farmacia.setPadding(20, 20, 20, 20);
+			farmacia.setTextSize(30);
+			farmacia.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+			LinearLayout ll = (LinearLayout)findViewById(R.id.admin_farmacies_linearlayout);
+			ll.addView(farmacia);
+		}
 	}
 	
 	@Override
@@ -78,7 +95,21 @@ public class adminFarmacies extends Activity {
             }
         });
 		
-		TreuFarmacies();
+		try {
+			TreuFarmacies();
+		}catch (Exception e){
+			Log.e("ERROR", "Impossible realitzar la connexió");
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			builder.setMessage(R.string.errorconnexio_desc)
+				   .setTitle(R.string.errorconnexio_titol);
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		}
+		
+		
 	}
 
 	@Override

@@ -17,5 +17,7 @@
     <string name="str_farmacies">Farmàcies</string>
     <string name="visualitzacio_medicament_descripcio">Descripció</string>
     <string name="visualitzacio_medicament_categoria">Categoria</string>
+    <string name="errorconnexio_desc">Impossible connectar-se al servidor</string>
+    <string name="errorconnexio_titol">Error de connexió</string>
 
 </resources>
