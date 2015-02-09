@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,20 +16,29 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-public class adminFarmacies extends Activity {
+public class adminSortides extends Activity {
 	
+	//Pel pas de missatges a altres intents
+	
+	public final static String MSG_ID_SORTIDES= "com.wsfarmacia_mbl.idsortides";
+	public final static String MSG_DATAIHORA_SORTIDES = "com.wsfarmacia_mbl.dataihorasortides";
+	public final static String MSG_MEDICAMENT_SORTIDES = "com.wsfarmacia_mbl.medicamentsortides";
+	public final static String MSG_QUANTITAT_SORTIDES = "com.wsfarmacia_mbl.quantitatsortides";
+	
+	//Listener pels botons de les sortides
+	OnClickListener boto_sortides_Listener;
 
 	
-	private void TreuFarmacies(){
+	private void TreuSortides(){
 		/*
-		 * Funció que posa els botons de cada notícia a la pantalla i
+		 * Funció que posa els botons de cada sortida a la pantalla i
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
 		try {
 			ConnexioServidor con = new ConnexioServidor();
-			con.consultaBBDD("farmacias@@LTIM@@lista");
+			con.consultaBBDD("medicamentos@@LTIM@@lista");
 			
-			//Exemple d'iteració entre farmàcies
+			//Exemple d'iteració entre elements
 			
 			for (int i=0; i<con.getNumEntrades();i++){
 				for (int j=0; j<con.getNumElements(i); j++){
@@ -39,13 +49,14 @@ public class adminFarmacies extends Activity {
 			
 			
 			for (int i=0; i<con.getNumEntrades();i++){
-				TextView farmacia = new TextView(this);
-				farmacia.setText(i+": "+con.treuElement(i, 1));
-				farmacia.setPadding(20, 20, 20, 20);
-				farmacia.setTextSize(30);
-				farmacia.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_farmacies_linearlayout);
-				ll.addView(farmacia);
+				//Pintam els botons rebuts
+				Button sortida = new Button(this);
+				sortida.setText(i+": "+con.treuElement(i, 1));
+				sortida.setPadding(20, 20, 20, 20);
+				sortida.setTextSize(30);
+				sortida.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_sortides_linearlayout);
+				ll.addView(sortida);
 			}
 		}catch (Exception e){
 			//Error fent la connexió, mostram un missatge.
@@ -65,9 +76,10 @@ public class adminFarmacies extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.admin_farmacies);
+		setContentView(R.layout.admin_sortides);
 		
-		final ImageButton btn = (ImageButton) findViewById(R.id.admin_farmacies_popupMenuBtn);
+		//Preparam el menú popup
+		final ImageButton btn = (ImageButton) findViewById(R.id.admin_sortides_popupMenuBtn);
 		final PopupMenu popupMenu = new PopupMenu(this, btn);
 		popupMenu.inflate(R.menu.admin_popup);	
 		btn.setOnClickListener(new View.OnClickListener() {
@@ -77,33 +89,34 @@ public class adminFarmacies extends Activity {
             }
         });	
 		
+		//Listener del menú popup
 		popupMenu.setOnMenuItemClickListener(
                 new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+            	Intent adminIntent;
             	//Menú principal. "Popup" que apareix en pitjar al boto superior dret
             	//per navegar entre pantalles
-            	Intent adminIntent;
                 switch (item.getItemId()) {
                     case R.id.popup_menu_noticies:
-        		    	
-                    	adminIntent = new Intent(adminFarmacies.this, adminNoticies.class);
-                    	adminFarmacies.this.startActivity(adminIntent);
-                        break;
+                    	adminIntent = new Intent(adminSortides.this, adminNoticies.class);
+                    	adminSortides.this.startActivity(adminIntent);
+                    	break;
                     case R.id.popup_menu_farmacies:
-                       // Log.w("admin","BLUE");
+        		    	
+                    	adminIntent = new Intent(adminSortides.this, adminFarmacies.class);
+                    	adminSortides.this.startActivity(adminIntent);
+        		    	
                         break;
                     case R.id.popup_menu_medicaments:
-                    	adminIntent = new Intent(adminFarmacies.this, adminMedicaments.class);
-                    	adminFarmacies.this.startActivity(adminIntent);
+                    	adminIntent = new Intent(adminSortides.this, adminMedicaments.class);
+                    	adminSortides.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_entrades:
-                    	adminIntent = new Intent(adminFarmacies.this, adminEntrades.class);
-                    	adminFarmacies.this.startActivity(adminIntent);
+                    	adminIntent = new Intent(adminSortides.this, adminEntrades.class);
+                    	adminSortides.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_sortides:
-                    	adminIntent = new Intent(adminFarmacies.this, adminSortides.class);
-                    	adminFarmacies.this.startActivity(adminIntent);
                         break;
                 }
                 return true;
@@ -111,8 +124,26 @@ public class adminFarmacies extends Activity {
         });
 		
 		
-		TreuFarmacies();
+		boto_sortides_Listener = new View.OnClickListener() {
 
+
+		    @Override
+		    public void onClick(View v) {
+				/*
+				 	En pitjar sobre un botó de notícia, hem d'identificar
+				 	el botó i iniciar el nou intent. al nou intent li
+				 	passam el títol de la notícia.
+				 */
+		    	Intent intentSortida = new Intent(adminSortides.this, visualitzacioSortida.class);
+				Button pressed = (Button)v;
+				Log.w("boto", pressed.getText().toString());
+				String message = pressed.getText().toString();
+				intentSortida.putExtra(MSG_ID_SORTIDES, String.valueOf(pressed.getId()));
+				adminSortides.this.startActivity(intentSortida);
+		    }
+		};
+		
+		TreuSortides();
 		
 		
 	}

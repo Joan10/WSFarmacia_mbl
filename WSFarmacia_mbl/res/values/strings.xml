@@ -19,5 +19,11 @@
     <string name="visualitzacio_medicament_categoria">Categoria</string>
     <string name="errorconnexio_desc">Impossible connectar-se al servidor</string>
     <string name="errorconnexio_titol">Error de connexió</string>
+    <string name="str_entrades">Entrada</string>
+    <string name="visualitzacio_entrada_dataihora">Data i hora</string>
+    <string name="visualitzacio_entrada_medicament">Medicament</string>
+    <string name="visualitzacio_entrada_quantitat">Quantitat</string>
+    <string name="str_sortides">Sortida</string>
+    <string name="visualitzacio_sortida_farmacia">Farmàcia</string>
 
 </resources>

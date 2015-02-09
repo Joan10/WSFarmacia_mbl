@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+
+  <!-- Header aligned to top -->
+
+  <RelativeLayout
+      android:id="@+id/admin_sortides_header"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentTop="true"
+      android:background="#E0E0E0"
+>
+
+      <TextView
+          android:id="@+id/admin_sortides_textView1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:layout_marginLeft="18dp"
+          android:text="@string/str_sortides"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+      <ImageButton
+          android:id="@+id/admin_sortides_popupMenuBtn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentTop="true"
+          android:adjustViewBounds="true"
+          android:baselineAlignBottom="false"
+          android:cropToPadding="false"
+          android:scaleType="fitXY"
+          android:src="@drawable/ic_popup_menu" />
+
+  </RelativeLayout>
+  <!-- Footer aligned to bottom -->
+  
+  
+  <RelativeLayout
+    android:id="@+id/admin_sortides_footer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#E0E0E0"
+    android:gravity="center" >
+
+      <ImageButton
+          android:id="@+id/admin_sortides_new_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentTop="true"
+          android:src="@drawable/ic_launcher" />
+  </RelativeLayout>
+  
+
+
+  <!-- Scrollable Item below header and above footer -->
+  <ScrollView
+    android:id="@+id/admin_sortides_scrollableContents"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:layout_below="@id/admin_sortides_header"> 
+    <!-- android:layout_above="@id/admin_sortides_footer"  -->
+    
+      
+
+   <LinearLayout
+        android:id="@+id/admin_sortides_linearlayout"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_horizontal"
+      android:orientation="vertical" >
+
+  
+
+    </LinearLayout>
+
+  </ScrollView>
+
+</RelativeLayout>

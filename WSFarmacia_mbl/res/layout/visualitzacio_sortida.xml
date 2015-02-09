@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+
+  <!-- Header aligned to top -->
+
+  <RelativeLayout
+      android:id="@+id/visualitzacio_sortida_header"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentTop="true"
+      android:background="#E0E0E0"
+>
+
+      <TextView
+          android:id="@+id/visualitzacio_sortida_titol"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:layout_marginLeft="18dp"
+          android:text="@string/str_sortides"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+      <ImageButton
+          android:id="@+id/visualitzacio_sortida_back"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentTop="true"
+          android:adjustViewBounds="true"
+          android:baselineAlignBottom="false"
+          android:cropToPadding="false"
+          android:scaleType="fitXY"
+          android:src="@drawable/ic_back" />
+
+  </RelativeLayout>
+
+
+
+ <ScrollView
+    android:id="@+id/visualitzacio_sortida_scrollableContents"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:layout_below="@id/visualitzacio_sortida_header"> 
+    <!-- android:layout_above="@id/footer"  -->
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical" >
+
+          <TextView
+              android:id="@+id/visualitzacio_sortida_id"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="Medium Text"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+          
+		 <LinearLayout         
+		    android:layout_width="fill_parent"
+			android:layout_height="2dip"
+			android:background="#000" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="@string/visualitzacio_entrada_dataihora"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/visualitzacio_sortida_dataihora"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:text="TextView" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="@string/visualitzacio_entrada_medicament"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/visualitzacio_sortida_medicament"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:focusableInTouchMode="true"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:text="Ctegoria" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="@string/visualitzacio_entrada_quantitat"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/visualitzacio_sortida_quantitat"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:focusableInTouchMode="true"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:text="Ctegoria" />
+          
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:text="@string/visualitzacio_sortida_farmacia"
+              android:textAppearance="?android:attr/textAppearanceMedium" />
+
+          <TextView
+              android:id="@+id/visualitzacio_sortida_farmacia"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:focusableInTouchMode="true"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:text="Ctegoria" />
+      </LinearLayout>
+      
+  </ScrollView>
+
+</RelativeLayout>

@@ -74,10 +74,12 @@ public class adminNoticies extends Activity {
                     	adminNoticies.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_entrades:
-                    	Log.w("admin","GREEN");
+                    	adminIntent = new Intent(adminNoticies.this, adminEntrades.class);
+                    	adminNoticies.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_sortides:
-                    	Log.w("admin","GREEN");
+                    	adminIntent = new Intent(adminNoticies.this, adminSortides.class);
+                    	adminNoticies.this.startActivity(adminIntent);
                         break;
                 }
                 return true;

@@ -1,6 +1,7 @@
 package com.wsfarmacia_mbl;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,10 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 public class adminMedicaments extends Activity {
 	
@@ -21,20 +24,52 @@ public class adminMedicaments extends Activity {
 	
 	//Listener pels botons de notícia
 	OnClickListener boto_medicament_Listener;
+
 	
 	private void TreuMedicaments(){
 		/*
-		 * Funció que posa els botons de cada notícia a la pantalla i
+		 * Funció que posa els botons de cada medicament a la pantalla i
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
-		Button myButton = new Button(this);
-		myButton.setOnClickListener(boto_medicament_Listener);
-		myButton.setText("El meu medicament");
-		myButton.setId(1545);
-		LinearLayout ll = (LinearLayout)findViewById(R.id.admin_medicaments_linearlayout);
-		ll.addView(myButton);
-		
+		try {
+			ConnexioServidor con = new ConnexioServidor();
+			con.consultaBBDD("medicamentos@@LTIM@@lista");
+			
+			//Exemple d'iteració entre elements
+			
+			for (int i=0; i<con.getNumEntrades();i++){
+				for (int j=0; j<con.getNumElements(i); j++){
+					Log.w("WSFARMACIA", con.treuElement(i, j));
+				}
+				Log.w("WSFARMACIA","----------");
+			}
+			
+			
+			for (int i=0; i<con.getNumEntrades();i++){
+				//Pintam els botons rebuts
+				Button medicament = new Button(this);
+				medicament.setText(i+": "+con.treuElement(i, 1));
+				medicament.setPadding(20, 20, 20, 20);
+				medicament.setTextSize(30);
+				medicament.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_medicaments_linearlayout);
+				ll.addView(medicament);
+			}
+		}catch (Exception e){
+			//Error fent la connexió, mostram un missatge.
+			Log.e("ERROR", "Impossible realitzar la connexió");
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			builder.setMessage(R.string.errorconnexio_desc)
+				   .setTitle(R.string.errorconnexio_titol);
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		}
+			
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,10 +109,12 @@ public class adminMedicaments extends Activity {
 
                         break;
                     case R.id.popup_menu_entrades:
-                    	Log.w("admin","GREEN");
+                    	adminIntent = new Intent(adminMedicaments.this, adminEntrades.class);
+                    	adminMedicaments.this.startActivity(adminIntent);
                         break;
                     case R.id.popup_menu_sortides:
-                    	Log.w("admin","GREEN");
+                    	adminIntent = new Intent(adminMedicaments.this, adminSortides.class);
+                    	adminMedicaments.this.startActivity(adminIntent);
                         break;
                 }
                 return true;
