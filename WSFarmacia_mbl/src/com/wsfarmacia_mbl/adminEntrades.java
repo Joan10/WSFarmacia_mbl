@@ -27,16 +27,24 @@ public class adminEntrades extends Activity {
 	
 	//Listener pels botons de notícia
 	OnClickListener boto_entrades_Listener;
-
+	
+	ConnexioServidor con;
+	
+	
 	
 	private void TreuEntrades(){
 		/*
 		 * Funció que posa els botons de cada entrada a la pantalla i
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
+
+		
+		String medicament ="";
+		
 		try {
-			ConnexioServidor con = new ConnexioServidor();
-			con.consultaBBDD("medicamentos@@LTIM@@lista");
+			con = new ConnexioServidor();
+			con.consultaBBDD("entradas@@LTIM@@lista");
+			
 			
 			//Exemple d'iteració entre elements
 			
@@ -51,12 +59,17 @@ public class adminEntrades extends Activity {
 			for (int i=0; i<con.getNumEntrades();i++){
 				//Pintam els botons rebuts
 				Button entrada = new Button(this);
-				entrada.setText(i+": "+con.treuElement(i, 1));
+				entrada.setId(i);
+				medicament= new ConnexioServidor().getMedicamentFromId(con.treuElement(i, 1));
+				Log.i("HOLA","-----");
+				entrada.setText(con.treuElement(i, 3)+" - "+medicament);
 				entrada.setPadding(20, 20, 20, 20);
-				entrada.setTextSize(30);
-				entrada.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				entrada.setTextSize(15);
+				entrada.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+				entrada.setOnClickListener(boto_entrades_Listener);
 				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_entrades_linearlayout);
 				ll.addView(entrada);
+				
 			}
 		}catch (Exception e){
 			//Error fent la connexió, mostram un missatge.
@@ -137,8 +150,15 @@ public class adminEntrades extends Activity {
 		    	Intent intentEntrada = new Intent(adminEntrades.this, visualitzacioEntrada.class);
 				Button pressed = (Button)v;
 				Log.w("boto", pressed.getText().toString());
-				String message = pressed.getText().toString();
-				intentEntrada.putExtra(MSG_ID_ENTRADES, String.valueOf(pressed.getId()));
+
+				intentEntrada.putExtra(MSG_ID_ENTRADES, con.treuElement(pressed.getId(), 0));
+				intentEntrada.putExtra(MSG_DATAIHORA_ENTRADES, con.treuElement(pressed.getId(), 3));
+				
+				String medicament= new ConnexioServidor().getMedicamentFromId(con.treuElement(pressed.getId(), 1));
+				
+				intentEntrada.putExtra(MSG_MEDICAMENT_ENTRADES, medicament);
+				intentEntrada.putExtra(MSG_QUANTITAT_ENTRADES, con.treuElement(pressed.getId(), 2));
+				
 				adminEntrades.this.startActivity(intentEntrada);
 		    }
 		};

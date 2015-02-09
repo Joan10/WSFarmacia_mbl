@@ -24,10 +24,11 @@ public class adminSortides extends Activity {
 	public final static String MSG_DATAIHORA_SORTIDES = "com.wsfarmacia_mbl.dataihorasortides";
 	public final static String MSG_MEDICAMENT_SORTIDES = "com.wsfarmacia_mbl.medicamentsortides";
 	public final static String MSG_QUANTITAT_SORTIDES = "com.wsfarmacia_mbl.quantitatsortides";
+	public final static String MSG_FARMACIA_SORTIDES = "com.wsfarmacia_mbl.quantitatfarmacia";
 	
 	//Listener pels botons de les sortides
 	OnClickListener boto_sortides_Listener;
-
+	private ConnexioServidor con;
 	
 	private void TreuSortides(){
 		/*
@@ -35,8 +36,8 @@ public class adminSortides extends Activity {
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
 		try {
-			ConnexioServidor con = new ConnexioServidor();
-			con.consultaBBDD("medicamentos@@LTIM@@lista");
+			con = new ConnexioServidor();
+			con.consultaBBDD("salidas@@LTIM@@lista");
 			
 			//Exemple d'iteració entre elements
 			
@@ -51,10 +52,15 @@ public class adminSortides extends Activity {
 			for (int i=0; i<con.getNumEntrades();i++){
 				//Pintam els botons rebuts
 				Button sortida = new Button(this);
-				sortida.setText(i+": "+con.treuElement(i, 1));
+				sortida.setId(i);
+				String medicament = new ConnexioServidor().getMedicamentFromId(con.treuElement(i, 1));
+				
+				sortida.setText(con.treuElement(i, 3)+" - "+medicament);
+				
 				sortida.setPadding(20, 20, 20, 20);
-				sortida.setTextSize(30);
-				sortida.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				sortida.setTextSize(15);
+				sortida.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+				sortida.setOnClickListener(boto_sortides_Listener);
 				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_sortides_linearlayout);
 				ll.addView(sortida);
 			}
@@ -137,8 +143,22 @@ public class adminSortides extends Activity {
 		    	Intent intentSortida = new Intent(adminSortides.this, visualitzacioSortida.class);
 				Button pressed = (Button)v;
 				Log.w("boto", pressed.getText().toString());
-				String message = pressed.getText().toString();
-				intentSortida.putExtra(MSG_ID_SORTIDES, String.valueOf(pressed.getId()));
+
+				String medicament= new ConnexioServidor().getMedicamentFromId(con.treuElement(pressed.getId(), 1));
+				String farmacia= new ConnexioServidor().getFarmaciaFromId(con.treuElement(pressed.getId(), 4));
+
+				
+				intentSortida.putExtra(MSG_ID_SORTIDES, con.treuElement(pressed.getId(), 0));
+				intentSortida.putExtra(MSG_DATAIHORA_SORTIDES, con.treuElement(pressed.getId(), 3));
+				
+				
+				intentSortida.putExtra(MSG_MEDICAMENT_SORTIDES, medicament);
+				intentSortida.putExtra(MSG_QUANTITAT_SORTIDES, con.treuElement(pressed.getId(), 2));
+				
+				intentSortida.putExtra(MSG_FARMACIA_SORTIDES, farmacia);
+
+				
+				
 				adminSortides.this.startActivity(intentSortida);
 		    }
 		};

@@ -25,5 +25,9 @@
     <string name="visualitzacio_entrada_quantitat">Quantitat</string>
     <string name="str_sortides">Sortida</string>
     <string name="visualitzacio_sortida_farmacia">Farmàcia</string>
+    
+    <string name="introip_msg">Introdueix la IP o hostname del servidor</string>
+    
+    <string name="introip_titol">Configuració</string>
 
 </resources>

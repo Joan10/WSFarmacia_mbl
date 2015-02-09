@@ -33,12 +33,14 @@ public class visualitzacioSortida extends Activity {
 		TextView dataihora_sortida = (TextView) findViewById(R.id.visualitzacio_sortida_dataihora);
 		TextView medicament_sortida = (TextView) findViewById(R.id.visualitzacio_sortida_medicament);
 		TextView quantitat_sortida = (TextView) findViewById(R.id.visualitzacio_sortida_quantitat);
+		TextView farmacia_sortida = (TextView) findViewById(R.id.visualitzacio_sortida_farmacia);
 		
 		
 		id_sortida.setText(intent.getStringExtra(adminSortides.MSG_ID_SORTIDES));
 		dataihora_sortida.setText(intent.getStringExtra(adminSortides.MSG_DATAIHORA_SORTIDES));
 		medicament_sortida.setText(intent.getStringExtra(adminSortides.MSG_MEDICAMENT_SORTIDES));
 		quantitat_sortida.setText(intent.getStringExtra(adminSortides.MSG_QUANTITAT_SORTIDES));
+		farmacia_sortida.setText(intent.getStringExtra(adminSortides.MSG_FARMACIA_SORTIDES));
 		
 	}
 

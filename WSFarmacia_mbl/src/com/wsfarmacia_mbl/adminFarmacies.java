@@ -42,8 +42,8 @@ public class adminFarmacies extends Activity {
 				TextView farmacia = new TextView(this);
 				farmacia.setText(i+": "+con.treuElement(i, 1));
 				farmacia.setPadding(20, 20, 20, 20);
-				farmacia.setTextSize(30);
-				farmacia.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				farmacia.setTextSize(15);
+				farmacia.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_farmacies_linearlayout);
 				ll.addView(farmacia);
 			}

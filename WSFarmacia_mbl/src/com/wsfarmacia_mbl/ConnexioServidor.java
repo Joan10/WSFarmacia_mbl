@@ -50,6 +50,7 @@ public class ConnexioServidor {
 		//parse response
 	}
 
+	
 	public void consultaBBDD(String XMLrequest) throws Exception{
 		
 		myRequest = new Async_getBBDD(XMLrequest);
@@ -69,6 +70,48 @@ public class ConnexioServidor {
 		if (acabat == false) throw new Exception();
 		
 		
+	}
+	
+	public String getMedicamentFromId(String id){
+
+		try {
+			this.consultaBBDD("medicamentos@@LTIM@@lista");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+		
+		for (int j = 0; j < this.getNumEntrades(); j++){
+			//Cercam entre totes les entrades el medicament amb el mateix id.
+			if (this.treuElement(j, 0).equals(id)) {
+				//En trobar-lo posam el nom del medicament a la var. medicament
+				return this.treuElement(j, 4);
+
+			}
+		}
+		
+		return "";
+	}
+
+	public String getFarmaciaFromId(String id){
+
+		try {
+			this.consultaBBDD("farmacias@@LTIM@@lista");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+		
+		for (int j = 0; j < this.getNumEntrades(); j++){
+			//Cercam entre totes les entrades el medicament amb el mateix id.
+			if (this.treuElement(j, 0).equals(id)) {
+				//En trobar-lo posam el nom del medicament a la var. medicament
+				return this.treuElement(j, 1);
+
+			}
+		}
+		
+		return "";
 	}
 	
 	public int getNumEntrades(){
@@ -118,7 +161,7 @@ onPostExecute() – Set the Fahrenheit value in textview control
 	    private static final String SOAP_ACTION = "http://WS.ltimwsfarmacia/";
 	    private String method;
 	    private static final String NAMESPACE = "http://WS.ltimwsfarmacia/";
-	    private static final String URL = "http://192.168.1.18:8080/WSFarmacia/WSFarmacias";
+	    private final String URL = "http://"+MainActivity.IP_SERVER+":8080/WSFarmacia/WSFarmacias";
 	    
 	    private int inici_str;
 	    private int final_str;

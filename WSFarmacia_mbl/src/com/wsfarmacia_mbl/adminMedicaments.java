@@ -48,10 +48,10 @@ public class adminMedicaments extends Activity {
 			for (int i=0; i<con.getNumEntrades();i++){
 				//Pintam els botons rebuts
 				Button medicament = new Button(this);
-				medicament.setText(i+": "+con.treuElement(i, 1));
+				medicament.setText(i+": "+con.treuElement(i, 4));
 				medicament.setPadding(20, 20, 20, 20);
-				medicament.setTextSize(30);
-				medicament.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+				medicament.setTextSize(15);
+				medicament.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_medicaments_linearlayout);
 				ll.addView(medicament);
 			}

@@ -40,6 +40,8 @@
         
         <activity android:name="visualitzacioNoticia"></activity>
         <activity android:name="visualitzacioMedicaments"></activity>
+        <activity android:name="visualitzacioEntrada"></activity>
+        <activity android:name="visualitzacioSortida"></activity>
     </application>
 
 </manifest>

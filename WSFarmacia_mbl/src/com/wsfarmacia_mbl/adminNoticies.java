@@ -1,6 +1,7 @@
 package com.wsfarmacia_mbl;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,10 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 public class adminNoticies extends Activity {
 	
@@ -27,13 +30,42 @@ public class adminNoticies extends Activity {
 		 * Funció que posa els botons de cada notícia a la pantalla i
 		 * hi afegeix el listener boto_noticia_listener.
 		 */
-		Button myButton = new Button(this);
-		myButton.setOnClickListener(boto_noticia_Listener);
-		myButton.setText("La meva primera notícia");
-		myButton.setId(544);
-		LinearLayout ll = (LinearLayout)findViewById(R.id.admin_noticies_linearlayout);
-		ll.addView(myButton);
-		
+		try {
+			ConnexioServidor con = new ConnexioServidor();
+			con.consultaBBDD("noticias@@LTIM@@lista");
+			
+			//Exemple d'iteració entre farmàcies
+			
+			for (int i=0; i<con.getNumEntrades();i++){
+				for (int j=0; j<con.getNumElements(i); j++){
+					Log.w("WSFARMACIA", con.treuElement(i, j));
+				}
+				Log.w("WSFARMACIA","----------");
+			}
+			
+			
+			for (int i=0; i<con.getNumEntrades();i++){
+				TextView noticia = new TextView(this);
+				noticia.setText(i+": "+con.treuElement(i, 1));
+				noticia.setPadding(20, 20, 20, 20);
+				noticia.setTextSize(15);
+				noticia.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_noticies_linearlayout);
+				ll.addView(noticia);
+			}
+		}catch (Exception e){
+			//Error fent la connexió, mostram un missatge.
+			Log.e("ERROR", "Impossible realitzar la connexió");
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			builder.setMessage(R.string.errorconnexio_desc)
+				   .setTitle(R.string.errorconnexio_titol);
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		}
+			
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
