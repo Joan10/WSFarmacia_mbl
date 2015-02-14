@@ -33,8 +33,9 @@ public class visualitzacioMedicaments extends Activity {
 		TextView desc_medicament = (TextView) findViewById(R.id.visualitzacio_medicament_descripcio);
 		TextView cate_medicament = (TextView) findViewById(R.id.visualitzacio_medicament_categoria);
 		
-		titol_medicament.setText(intent.getStringExtra(adminMedicaments.TITOL_MEDICAMENT));
-		desc_medicament.setText(intent.getStringExtra(adminMedicaments.ID_MEDICAMENT));
+		titol_medicament.setText(intent.getStringExtra(adminMedicaments.MSG_TITOL_MEDICAMENT));
+		desc_medicament.setText(intent.getStringExtra(adminMedicaments.MSG_DESC_MEDICAMENT));
+		cate_medicament.setText(intent.getStringExtra(adminMedicaments.MSG_NOM_CATEGORIA));
 		
 		
 	}

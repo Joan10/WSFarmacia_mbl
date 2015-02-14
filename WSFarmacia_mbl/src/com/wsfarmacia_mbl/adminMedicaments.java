@@ -19,8 +19,9 @@ import android.widget.TextView;
 public class adminMedicaments extends Activity {
 	
 	//Pel pas de missatges a altres intents
-	public final static String TITOL_MEDICAMENT = "com.wsfarmacia_mbl.titolmedicament";
-	public final static String ID_MEDICAMENT= "com.wsfarmacia_mbl.idmedicament";
+	public final static String MSG_TITOL_MEDICAMENT = "com.wsfarmacia_mbl.titolmedicament";
+	public final static String MSG_DESC_MEDICAMENT= "com.wsfarmacia_mbl.descmedicament";
+	public final static String MSG_NOM_CATEGORIA= "com.wsfarmacia_mbl.idmedicament";
 	
 	//Listener pels botons de notícia
 	OnClickListener boto_medicament_Listener;
@@ -48,10 +49,11 @@ public class adminMedicaments extends Activity {
 			for (int i=0; i<con.getNumEntrades();i++){
 				//Pintam els botons rebuts
 				Button medicament = new Button(this);
-				medicament.setText(i+": "+con.treuElement(i, 4));
+				medicament.setText(con.treuElement(i, 4));
 				medicament.setPadding(20, 20, 20, 20);
 				medicament.setTextSize(15);
 				medicament.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+				medicament.setOnClickListener(boto_medicament_Listener);
 				LinearLayout ll = (LinearLayout)findViewById(R.id.admin_medicaments_linearlayout);
 				ll.addView(medicament);
 			}
@@ -132,13 +134,34 @@ public class adminMedicaments extends Activity {
 				 	el botó i iniciar el nou intent. al nou intent li
 				 	passam el títol de la notícia.
 				 */
+		    	String id_cat, nom_cat;
 		    	Intent intentMedicament = new Intent(adminMedicaments.this, visualitzacioMedicaments.class);
 				Button pressed = (Button)v;
 				Log.w("boto", pressed.getText().toString());
 				String message = pressed.getText().toString();
-				intentMedicament.putExtra(TITOL_MEDICAMENT, message);
-				intentMedicament.putExtra(ID_MEDICAMENT, String.valueOf(pressed.getId()));
-				adminMedicaments.this.startActivity(intentMedicament);
+				intentMedicament.putExtra(MSG_TITOL_MEDICAMENT, message);
+				
+				
+				//Treim la id de la categoria.
+				ConnexioServidor con0 = new ConnexioServidor();
+				Log.w("CONSULTA CAT", message);
+				try {
+					con0.consultaBBDD("medicamentos@@LTIM@@consulta@@LTIM@@"+message);
+					id_cat = con0.treuElement(0, 1);
+					Log.w("CONSULTA CAT", id_cat);
+					nom_cat = con0.getCategoriaFromId(id_cat);
+					Log.w("CONSULTA CAT", nom_cat);
+					//I la transformam en un text
+					intentMedicament.putExtra(MSG_NOM_CATEGORIA, nom_cat);
+					intentMedicament.putExtra(MSG_DESC_MEDICAMENT, con0.treuElement(0, 2));
+					adminMedicaments.this.startActivity(intentMedicament);
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
 		    }
 		};
 		

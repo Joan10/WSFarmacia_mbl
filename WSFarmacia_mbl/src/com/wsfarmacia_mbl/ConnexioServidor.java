@@ -72,6 +72,27 @@ public class ConnexioServidor {
 		
 	}
 	
+	public String getCategoriaFromId(String id){
+
+		try {
+			this.consultaBBDD("categorias@@LTIM@@lista");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "";
+		}
+		
+		for (int j = 0; j < this.getNumEntrades(); j++){
+			//Cercam entre totes les entrades el medicament amb el mateix id.
+			if (this.treuElement(j, 0).equals(id)) {
+				//En trobar-lo posam el nom del medicament a la var. medicament
+				return this.treuElement(j, 1);
+
+			}
+		}
+		
+		return "";
+	}
+	
 	public String getMedicamentFromId(String id){
 
 		try {
